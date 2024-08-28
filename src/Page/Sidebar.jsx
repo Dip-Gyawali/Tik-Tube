@@ -9,9 +9,11 @@ import BroCode from '../assets/icons/brocode.jpg';
 import webDev from '../assets/icons/webdev.jpg';
 import cocomelon from '../assets/icons/cocomelon.jpg';
 import greatStack from '../assets/icons/great stack.jpg';
+import { Outlet } from 'react-router-dom';
 
 export default function Sidebar() {
   return (
+    <>
     <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[10%] z-10 overflow-y-auto custom-scrollbar'>
       <div className=' p-3 flex flex-col gap-3'>
 
@@ -145,6 +147,8 @@ export default function Sidebar() {
       <div className='p-3 flex flex-col gap-3'>
         <p>Terms Privacy Policy & Safety Copyright © 2024 Google LLC</p>
       </div>
+    <Outlet/>
     </div>
+    </>
   )
 }

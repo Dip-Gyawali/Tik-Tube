@@ -1,11 +1,19 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Page/Navbar";
-import Sidebar from "./Page/Sidebar";
+import Home from "./Home";
 
-export default function App(){
-  return(
-    <>
-    <Navbar/>
-    <Sidebar/>
-    </>
-  );
+const route = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navbar />,
+    children: [
+      {
+        path: '/',
+        element: <Home/>,
+      }
+    ]
+  }
+]);
+export default function App() {
+  return <RouterProvider router={route} />
 }

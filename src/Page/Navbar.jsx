@@ -4,9 +4,11 @@ import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import ProfilePic from '../assets/icons/profilePic.jpg'
+import { Outlet } from 'react-router-dom';
 
 export default function Navbar() {
     return (
+        <>
         <div className='flex items-center justify-between bg-[#0f0f0f] text-white p-1 fixed top-0 z-10 w-[100vw]'>
             {/* youtube logos and side bar display button */}
             <div className='flex items-center justify-center gap-2 m-4'>
@@ -24,5 +26,7 @@ export default function Navbar() {
                 <img src={ProfilePic} alt="Profile pic" className='rounded-[50%] h-[30px] w-[30px]'/>
             </div>
         </div>
+            <Outlet/>
+        </>
     )
 }
