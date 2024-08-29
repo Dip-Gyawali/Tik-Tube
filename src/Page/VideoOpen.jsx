@@ -8,7 +8,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 export default function VideoOpen() {
   return (
     <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[80%] z-10 overflow-y-auto p-5 flex flex-col gap-3'>
-      <video src={Demo} controls muted></video>
+      <video src={Demo} controls muted className='rounded-[20px] h-[75vh]'></video>
       <h1 className='text-bold text-[30px]'>Title of the above video is here</h1>
 
       {/* channel subscribe like button section */}
