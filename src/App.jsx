@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Page/Navbar";
 import Home from "./Home";
+import Video from "./Page/Video";
 
 const route = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const route = createBrowserRouter([
       {
         path: '/',
         element: <Home/>,
+      },
+      {
+        path: '/video/:categoryID/:videoID',
+        element: <Video/>
       }
     ]
   }
