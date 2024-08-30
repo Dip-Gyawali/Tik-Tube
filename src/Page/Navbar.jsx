@@ -20,7 +20,9 @@ export default function Navbar() {
             {/* search bar */}
             <div className='flex items-center justify-center gap-1 border-gray-500 border-2 rounded-[30px] overflow-hidden'>
                 <input type="text" placeholder='Search' className='border-none bg-transparent outline-none w-[20vw] px-3 py-2' />
+                <Link to='/search'>
                 <FontAwesomeIcon icon={faMagnifyingGlass} className='bg-[#ffffff14] p-4' />
+                </Link>
             </div>
             {/* Profile logo and notification */}
             <div className='flex items-center justify-center gap-4 mr-4'>

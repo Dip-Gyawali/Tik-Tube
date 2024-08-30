@@ -3,6 +3,7 @@ import Navbar from "./Page/Navbar";
 import Home from "./Home";
 import Video from "./Page/Video";
 import Context from "./context/context";
+import SearchResult from "./Page/SearchResult";
 
 const route = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const route = createBrowserRouter([
       {
         path: '/video/:categoryID/:videoID',
         element: <Video/>
+      },
+      {
+        path: '/search',
+        element:<SearchResult/>
       }
     ]
   }

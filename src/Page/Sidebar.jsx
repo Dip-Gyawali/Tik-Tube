@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faMusic, faGamepad, faFutbolBall, faTelevision, faMicrochip, faFire, faGear, faFlag, faCircleQuestion, faMessage } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faMusic, faGamepad, faFutbolBall, faTelevision, faMicrochip, faGear, faFlag, faCircleQuestion, faMessage } from '@fortawesome/free-solid-svg-icons'
 import Hiten from '../assets/icons/hiten.jpg';
 import Ronaldo from '../assets/icons/urRonaldo.jpg';
 import Saket from '../assets/icons/saket.jpg';
@@ -9,8 +9,7 @@ import BroCode from '../assets/icons/brocode.jpg';
 import webDev from '../assets/icons/webdev.jpg';
 import cocomelon from '../assets/icons/cocomelon.jpg';
 import greatStack from '../assets/icons/great stack.jpg';
-import { Outlet } from 'react-router-dom';
-import { faFaceGrinSquintTears } from '@fortawesome/free-regular-svg-icons';
+import { Link, Outlet } from 'react-router-dom';
 import { apiContext } from '../context/context';
 
 export default function Sidebar() {
@@ -36,6 +35,7 @@ const handleCategoryClick = (categoryId) => {
       <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[10%] z-10 overflow-y-auto custom-scrollbar'>
         <div className=' p-3 flex flex-col gap-3'>
         {categories.map((category) => (
+          <Link to="/">
                 <div
                     key={category.id}
                     className={`flex items-center gap-1 cursor-pointer p-2 rounded-lg ${activeCategory === category.id ? 'bg-[#ffffff31] text-white' : 'bg-transparent text-gray-400'}`}
@@ -44,6 +44,7 @@ const handleCategoryClick = (categoryId) => {
                     <FontAwesomeIcon icon={category.icon} />
                     <p>{category.label}</p>
                 </div>
+            </Link>
             ))}
         </div>
         <hr />
@@ -134,7 +135,6 @@ const handleCategoryClick = (categoryId) => {
         <div className='p-3 flex flex-col gap-3'>
           <p>Terms Privacy Policy & Safety Copyright © 2024 Google LLC</p>
         </div>
-        <Outlet />
       </div>
     </>
   )
