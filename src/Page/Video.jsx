@@ -8,7 +8,7 @@ export default function Video() {
   return (
     <div>
        <VideoOpen videoID={videoID}/>
-       <Recommendation/>
+       <Recommendation categoryID={categoryID}/>
     </div>
   )
 }

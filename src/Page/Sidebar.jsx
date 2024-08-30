@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faMusic, faGamepad, faFutbolBall, faTelevision, faMicrochip, faFire, faGear, faFlag, faCircleQuestion, faMessage } from '@fortawesome/free-solid-svg-icons'
 import Hiten from '../assets/icons/hiten.jpg';
@@ -15,53 +15,36 @@ import { apiContext } from '../context/context';
 
 export default function Sidebar() {
   const {category,setCategory}= useContext(apiContext);
+  const [activeCategory, setActiveCategory]= useState(0);
+
+  const categories = [
+    { id: 0, icon: faHouse, label: 'Home' },
+    { id: 10, icon: faMusic, label: 'Music' },
+    { id: 20, icon: faGamepad, label: 'Gaming' },
+    { id: 17, icon: faFutbolBall, label: 'Sports' },
+    { id: 24, icon: faTelevision, label: 'Entertainment' },
+    { id: 28, icon: faMicrochip, label: 'Technology' },
+];
+
+const handleCategoryClick = (categoryId) => {
+  setActiveCategory(categoryId); 
+  setCategory(categoryId);        
+};
+
   return (
     <>
       <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[10%] z-10 overflow-y-auto custom-scrollbar'>
         <div className=' p-3 flex flex-col gap-3'>
-
-          {/* home button section */}
-          <div className='flex items-center gap-1 cursor-pointer' onClick={() => setCategory(0)}>
-            <FontAwesomeIcon icon={faHouse} />
-            <p>Home</p>
-          </div>
-
-          {/* music button section */}
-          <div className='flex items-center gap-1 cursor-pointer' onClick={() => setCategory(10)}>
-            <FontAwesomeIcon icon={faMusic} />
-            <p>Music</p>
-          </div>
-
-          {/* gaming button section */}
-          <div className='flex items-center gap-1 cursor-pointer' onClick={() => setCategory(20)}>
-            <FontAwesomeIcon icon={faGamepad} />
-            <p>Gaming</p>
-          </div>
-
-          {/* sports button section */}
-          <div className='flex items-center gap-1 cursor-pointer' onClick={() => setCategory(17)}>
-            <FontAwesomeIcon icon={faFutbolBall} />
-            <p>Sports</p>
-          </div>
-
-          {/* Entertainment button section */}
-          <div className='flex items-center gap-1 cursor-pointer' onClick={() => setCategory(24)}>
-            <FontAwesomeIcon icon={faTelevision} />
-            <p>Entertainment</p>
-          </div>
-
-          {/* Tech button section */}
-          <div className='flex items-center gap-1 cursor-pointer' onClick={() => setCategory(28)}>
-            <FontAwesomeIcon icon={faMicrochip} />
-            <p>Technology</p>
-          </div>
-
-          {/* Trending Section */}
-          <div className='flex items-center gap-1 cursor-pointer' onClick={() => setCategory(0)}>
-            <FontAwesomeIcon icon={faFaceGrinSquintTears} />
-            <p>Comedy</p>
-          </div>
-
+        {categories.map((category) => (
+                <div
+                    key={category.id}
+                    className={`flex items-center gap-1 cursor-pointer p-2 rounded-lg ${activeCategory === category.id ? 'bg-[#ffffff31] text-white' : 'bg-transparent text-gray-400'}`}
+                    onClick={() => handleCategoryClick(category.id)}
+                >
+                    <FontAwesomeIcon icon={category.icon} />
+                    <p>{category.label}</p>
+                </div>
+            ))}
         </div>
         <hr />
 
