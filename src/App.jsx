@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Page/Navbar";
 import Home from "./Home";
 import Video from "./Page/Video";
+import Context from "./context/context";
 
 const route = createBrowserRouter([
   {
@@ -20,5 +21,9 @@ const route = createBrowserRouter([
   }
 ]);
 export default function App() {
-  return <RouterProvider router={route} />
+  return (
+    <Context>
+      <RouterProvider router={route} />
+    </Context>
+  );
 }
