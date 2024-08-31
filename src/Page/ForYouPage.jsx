@@ -11,6 +11,8 @@ export default function ForYouPage() {
   let apiKey = import.meta.env.VITE_API_KEY;
   let apiURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${category}&key=${apiKey}`;
 
+  console.log(apiKey);
+
   async function getData() {
     try {
       let res = await fetch(apiURL);
@@ -18,6 +20,7 @@ export default function ForYouPage() {
         console.log("Error fetching video data");
       }
       let data = await res.json();
+      console.log(data);
       setData(data.items);
 
       const channelIds = data.items.map((video) => video.snippet.channelId);
