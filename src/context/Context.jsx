@@ -4,6 +4,7 @@ export const apiContext = createContext();
 
 export default function Context({children}) {
     const [category,setCategory]=useState(0);
+    const [searchData,setSearchData]= useState("");
 
     const valueConvertor = (value)=>{
         if(value>1000000){
@@ -17,7 +18,7 @@ export default function Context({children}) {
         }
     }
   return(
-    <apiContext.Provider value={{category,setCategory,valueConvertor}}>
+    <apiContext.Provider value={{category,setCategory,valueConvertor,setSearchData}}>
       {children}
     </apiContext.Provider>
   );
