@@ -23,7 +23,7 @@ export default function Navbar() {
                 <Link to="/">
                     <div className='flex items-center gap-2 m-2 md:m-4'>
                         <FontAwesomeIcon icon={faYoutube} size="2x" color="red" />
-                        <p className='text-lg md:text-2xl'>YouTube</p>
+                        <p className='text-lg md:text-2xl'>TikTube</p>
                     </div>
                 </Link>
                 <div className='flex items-center gap-1 border-gray-500 border-2 rounded-full overflow-hidden w-4/5 sm:w-2/3 md:w-[40vw] lg:w-[30vw]'>
