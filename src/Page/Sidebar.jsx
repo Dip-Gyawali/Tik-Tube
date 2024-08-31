@@ -32,7 +32,7 @@ const handleCategoryClick = (categoryId) => {
 
   return (
     <>
-      <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[10%] z-10 overflow-y-auto custom-scrollbar'>
+      <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[10%] z-10 overflow-y-auto custom-scrollbar hidden sm:hidden md:hidden lg:block xl:block'>
         <div className=' p-3 flex flex-col gap-3'>
         {categories.map((category) => (
           <Link to="/">

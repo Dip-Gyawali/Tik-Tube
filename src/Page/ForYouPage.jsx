@@ -71,7 +71,7 @@ export default function ForYouPage() {
   };
 
   return (
-    <div className='bg-[#0f0f0f] text-white fixed right-0 top-[72px] z-10 overflow-y-auto h-[93vh] w-[90%] grid grid-cols-5 p-8 gap-5'>
+    <div className='bg-[#0f0f0f] text-white fixed right-0 top-[72px] z-10 overflow-y-auto h-[93vh] w-[90%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-8 gap-5'>
       {data.map((ele, index) => (
         <Link to={`video/${ele.snippet.categoryId}/${ele.id}`} key={index}>
           <div className='flex flex-col gap-3 p-5'>

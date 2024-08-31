@@ -10,7 +10,7 @@ export default function SearchResult() {
     const { searchData, valueConvertor } = useContext(apiContext);
     const [search, setSearch] = useState([]);
     const [channelData, setChannelData] = useState({});
-    const {categoryID} = useParams();
+    const { categoryID } = useParams();
 
     const apiKey = import.meta.env.VITE_API_KEY;
     const apiURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchData}&type=video&maxResults=50&key=${apiKey}`;
@@ -48,7 +48,9 @@ export default function SearchResult() {
     }
 
     useEffect(() => {
-        getSearchData();
+        if (searchData) {
+            getSearchData();
+        }
     }, [searchData]);
 
     useEffect(() => {
@@ -56,39 +58,52 @@ export default function SearchResult() {
         uniqueChannelIDs.forEach(channelID => getChannelData(channelID));
     }, [search]);
 
+    const formatDuration = (isoDuration) => {
+        const match = isoDuration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+        const hours = match[1] ? match[1].replace('H', '') : '0';
+        const minutes = match[2] ? match[2].replace('M', '') : '0';
+        const seconds = match[3] ? match[3].replace('S', '') : '0';
+        return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+    };
+
     return (
-        <div>
+        <div className='flex'>
             <Sidebar />
-            <div className='bg-[#0f0f0f] text-white fixed right-0 top-[72px] z-10 overflow-y-auto h-[93vh] w-[90%] flex flex-col gap-7 p-10'>
-                {search.map((ele, index) => {
-                    const channel = channelData[ele.snippet.channelId];
-                    return (
-                        <Link to={`/video/${ele.snippet.categoryId}/${ele.id.videoId}`} key={index}>
-                        <div className='flex gap-5 ml-40'>
-                            <img src={ele.snippet.thumbnails.medium.url} alt="thumbnail" className='h-[300px] w-[500px] rounded-2xl' />
-                            <div className='flex flex-col gap-3'>
-                                <div>
-                                    <h1 className='font-bold text-xl'>{ele.snippet.title}</h1>
-                                    <p className='text-sm'>
-                                        {channel ? valueConvertor(channel.statistics.viewCount) : 'Loading views'} views &bull;    {ele.snippet.publishedAt ? moment(ele.snippet.publishedAt).fromNow(): 'Loading date'}
-                                    </p>
+            <div className='bg-[#0f0f0f] text-white fixed right-0 top-[72px] z-10 overflow-y-auto h-[93vh] w-full md:w-[80%] lg:w-[90%] p-4 md:p-6 lg:p-8'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+                    {search.map((ele, index) => {
+                        const channel = channelData[ele.snippet.channelId];
+                        const resolvedCategoryID = ele.snippet.categoryId || "20";
+                        return (
+                            <Link to={`/video/${resolvedCategoryID}/${ele.id.videoId}`} key={index}>
+                                <div className='flex flex-col gap-3'>
+                                    <div className='relative'>
+                                        <img src={ele.snippet.thumbnails.medium.url} alt="thumbnail" className='w-full h-[200px] object-cover rounded-lg' />
+                                        <div className='absolute bottom-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded'>
+                                            {formatDuration(ele.contentDetails?.duration || "PT0H0M0S")}
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <h1 className='font-bold text-lg'>{ele.snippet.title}</h1>
+                                        <p className='text-sm'>
+                                            {channel ? valueConvertor(channel.statistics.viewCount) : 'Loading views'} views &bull; {ele.snippet.publishedAt ? moment(ele.snippet.publishedAt).fromNow() : 'Loading date'}
+                                        </p>
+                                        <div className='flex items-center gap-2 mt-2'>
+                                            <img
+                                                src={channel?.snippet?.thumbnails?.default?.url || hiten}
+                                                alt="profile"
+                                                className='h-[30px] w-[30px] rounded-full'
+                                            />
+                                            <h2 className='text-sm'>{ele.snippet.channelTitle}</h2>
+                                        </div>
+                                        <p className='text-sm mt-2'>{ele.snippet.description}</p>
+                                    </div>
                                 </div>
-                                <div className='flex gap-3'>
-                                    <img
-                                        src={channel?.snippet?.thumbnails?.default?.url || hiten}
-                                        alt="profile"
-                                        className='h-[25px] w-[25px] rounded-[50%]'
-                                    />
-                                    <h2>{ele.snippet.channelTitle}</h2>
-                                </div>
-                                <p className='text-sm'>{ele.snippet.description}</p>
-                            </div>
-                        </div>
-                        </Link>
-                    );
-                })}
+                            </Link>
+                        );
+                    })}
+                </div>
             </div>
-            <Recommendation categoryID={categoryID}/>
         </div>
     );
 }

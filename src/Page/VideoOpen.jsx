@@ -78,21 +78,20 @@ export default function VideoOpen() {
   }, [videoData]);
 
   return (
-    <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[80%] z-10 overflow-y-auto p-5 flex flex-col gap-3 video-open'>
+    <div className='bg-[#0f0f0f] text-white fixed top-[72px] left-0 h-[93vh] w-[100vw] sm:w-[100vw] md:w-[100vw] lg:w-[80%] xl:w-[80%] z-10 overflow-y-auto p-5 flex flex-col gap-3 video-open'>
       <div className='rounded-xl'>
         <iframe src={`https://www.youtube.com/embed/${videoID}?autoplay=1`}
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
-          className="h-[80vh] w-full rounded-xl"
+          className="h-[80vh] w-[100vw] sm:w-[100vw] md:w-[100vw] lg:w-full xl:w-full rounded-xl"
           allowfullscreen></iframe>
       </div>
 
       <h1 className='text-bold text-[30px]'>{videoData ? videoData.snippet.title : "The title of the video"}</h1>
 
       {/* channel subscribe like button section */}
-      <div className='flex items-center justify-between'>
-
+      <div className='flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row xl:flex-row items-center justify-between'>
         {/* channel section */}
         <div className='flex items-center gap-3'>
           <img src={channelData ? channelData.snippet.thumbnails.default.url : ""} alt="profile" className='h-[40px] w-[40px] rounded-[50%]' />
